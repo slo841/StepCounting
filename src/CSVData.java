@@ -106,7 +106,7 @@ public class CSVData {
 	 * @return a double array of the data in the column
 	 */
 	public double[] getColumn(int column) {
-		double[] cols = new double[data[0].length];
+		double[] cols = new double[data.length];
 		for (int i = 0; i < cols.length; i++) {
 			cols[i] = data[i][column];
 		}
@@ -121,7 +121,7 @@ public class CSVData {
 	 * @return a double array of the data in the column
 	 */
 	public double[] getColumn(String name) {
-		double[] cols = new double[data[0].length];
+		double[] cols = new double[data.length];
 		for (int i = 0; i < columnNames.length; i++) {
 			if (columnNames[i].equals(name)) {
 				for (int j = 0; j < cols.length; j++) {
@@ -142,34 +142,33 @@ public class CSVData {
 	 * @return a double array of the data in the row
 	 */
 	public double[] getRow(int row) {
-		double[] r = new double[data.length];
+		double[] r = new double[data[0].length];
 		for (int i = 0; i < r.length; i++) {
 			r[i] = data[row][i];
 		}
 		return r;
 	}
 
-	/***
-	 * might need to delete this
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public double[] getRow(String name) {
-		double[] r = new double[data.length];
-		for (int i = 0; i < columnNames.length; i++) {
-			if (columnNames[i].equals(name)) {
-				for (int j = 0; j < r.length; j++) {
-					r[j] = data[j][i];
-				}
-			}
-		}
-		return r;
-	}
+//	/***
+//	 * might need to delete this
+//	 * 
+//	 * @param name
+//	 * @return
+//	 */
+//	public double[] getRow(String name) {
+//		double[] r = new double[data[0].length];
+//		for (int i = 0; i < columnNames.length; i++) {
+//			if (columnNames[i].equals(name)) {
+//				for (int j = 0; j < r.length; j++) {
+//					r[j] = data[j][i];
+//				}
+//			}
+//		}
+//		return r;
+//	}
 
 	/***
-	 * 
-	 * @param arr
+	 * Returns the 
 	 * @param startRow
 	 * @param endRow
 	 * @return
