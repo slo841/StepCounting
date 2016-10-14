@@ -49,7 +49,11 @@ public class CSVData {
 	 * @return a double array of the data in the column
 	 */
 	public double[] getColumn(int column) {
-		return null;
+		double[] cols = new double[data[0].length];
+		for (int i = 0; i < cols.length; i++) {
+			cols[i] = data[i][column];
+		}
+		return cols;
 	}
 
 	/***
@@ -60,7 +64,15 @@ public class CSVData {
 	 * @return a double array of the data in the column
 	 */
 	public double[] getColumn(String name) {
-		return null;
+		double[] cols = new double[data[0].length];
+		for (int i = 0; i < columnNames.length; i++) {
+			if (columnNames[i].equals(name)) {
+				for (int j = 0; j < cols.length; j++) {
+					cols[j] = data[j][i];
+				}
+			}
+		}
+		return cols;
 	}
 
 	/***
@@ -73,12 +85,29 @@ public class CSVData {
 	 * @return a double array of the data in the row
 	 */
 	public double[] getRow(int row) {
-		return null;
+		double[] r = new double[data.length];
+		for (int i = 0; i < r.length; i++) {
+			r[i] = data[row][i];
+		}
+		return r;
 	}
 
-	
+	/***
+	 * might need to delete this
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public double[] getRow(String name) {
-		return null;
+		double[] r = new double[data.length];
+		for (int i = 0; i < columnNames.length; i++) {
+			if (columnNames[i].equals(name)) {
+				for (int j = 0; j < r.length; j++) {
+					r[j] = data[j][i];
+				}
+			}
+		}
+		return r;
 	}
 
 	/***
@@ -89,15 +118,31 @@ public class CSVData {
 	 * @return
 	 */
 	public double[][] getRows(int startRow, int endRow) {
-		return null;
+		int numOfRows = endRow - startRow;
+		double[][] rows = new double[numOfRows][data[0].length];
+		for (int row = 0; row < numOfRows; row++) {
+			for (int col = 0; col < data[0].length; col++) {
+				rows[row][col] = data[row][col];
+			}
+		}
+		return rows;
 	}
 
-	public double[][] getRows(int[] rowIndexes) {
-		return null;
-	}
-	
+	// public double[][] getRows(int[] rowIndexes) {
+	// return null;
+	// }
+
 	public double[][] getRows(String[] rowNames) {
-		return null;
+		double[][] rows = new double[rowNames.length][data[0].length];
+		for (int i = 0; i < rowNames.length; i++) {
+			String name = rowNames[i];
+			if (rowNames[i].equals(name)) {
+				for (int col = 0; col < data[0].length; col++) {
+					rows[i][col] = data[i][col];
+				}
+			}
+		}
+		return rows;
 	}
 
 	/***
@@ -108,15 +153,31 @@ public class CSVData {
 	 * @return
 	 */
 	public double[][] getColumns(int startCol, int endCol) {
-		return null;
+		int numOfCols = endCol - startCol;
+		double[][] cols = new double[data.length][numOfCols];
+		for (int col = 0; col < numOfCols; col++) {
+			for (int row = 0; row < data.length; row++) {
+				cols[row][col] = data[row][col];
+			}
+		}
+		return cols;
 	}
 
-	public double[][] getColumns(int[] colIndexes) {
-		return null;
-	}
+	// public double[][] getColumns(int[] colIndexes) {
+	// return null;
+	// }
 
 	public double[][] getColumns(String[] colNames) {
-		return null;
+		double[][] cols = new double[data.length][colNames.length];
+		for (int i = 0; i < colNames.length; i++) {
+			String name = colNames[i];
+			if (colNames[i].equals(name)) {
+				for (int row = 0; row < data.length; row++) {
+					cols[row][i] = data[row][i];
+				}
+			}
+		}
+		return cols;
 	}
 
 	/***
@@ -126,7 +187,11 @@ public class CSVData {
 	 * @param vals
 	 */
 	public void setColumn(int columnIndex, double[] vals) {
-
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0; j < vals.length; j++) {
+				data[i][columnIndex] = vals[j];
+			}
+		}
 	}
 
 	/***
@@ -136,11 +201,21 @@ public class CSVData {
 	 * @param vals
 	 */
 	public void setRow(int rowIndex, double[] vals) {
-
+		for (int i = 0; i < data[0].length; i++) {
+			for (int j = 0; j < vals.length; j++) {
+				data[rowIndex][i] = vals[j];
+			}
+		}
 	}
 
 	public void setValue(int rowIndex, int columnIndex, double[] vals) {
-
+		for (int row = 0; row < rowIndex; row++) {
+			for (int col = 0; col < columnIndex; col++) {
+				for (int j = 0; j < vals.length; j++) {
+					data[row][col] = vals[j];
+				}
+			}
+		}
 	}
 
 	/***
@@ -149,7 +224,11 @@ public class CSVData {
 	 * @return
 	 */
 	public String getTitles() {
-		return null;
+		String titles = "";
+		for (int i = 0; i < columnNames.length; i++) {
+			titles = titles + " " + columnNames[i];
+		}
+		return titles;
 	}
 
 	/***
