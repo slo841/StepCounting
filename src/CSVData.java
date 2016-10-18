@@ -87,6 +87,25 @@ public class CSVData {
 		CSVData data = new CSVData(filename, null, numLinesToIgnore + 1);
 		return data;
 	}
+	
+	public String[][] readCSVFile(CSVData data, int numLinesToIgnore) {
+		int numCol = columnNames.length;
+		String[][] file = new String[numRows][numCol];
+
+		for (int i = 0; i < numCol; i++) {
+			file[0][i] = columnNames[i];
+		}
+
+		for (int row = numLinesToIgnore + 1; row < numRows; row++) {
+			double[] nextRow = getRow(row);
+			
+			for (int j = 0; j < nextRow.length; j++) {
+				String val = String.valueOf(nextRow[j]);
+				file[row][j] = val;
+			}
+		}
+		return file;
+	}
 
 	/***
 	 * Saves the state of the data into a CSV file
