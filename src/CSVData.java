@@ -69,9 +69,6 @@ public class CSVData {
 	 */
 	public static CSVData readCSVFile(String filename, int numLinesToIgnore, String[] columnNames) {
 		CSVData data = new CSVData(filename, columnNames, numLinesToIgnore + 1);
-		for (int i = 0; i < columnNames.length; i++) {
-//			data[numLinesToIgnore][i] = columnNames[i];
-		}
 		return data;
 	}
 
@@ -87,10 +84,10 @@ public class CSVData {
 	 * @return a CSVData object for that file
 	 */
 	public static CSVData readCSVFile(String filename, int numLinesToIgnore) {
-//		CSVData data = new CSVData(filename, columnNames, numLinesToIgnore + 1);
-		return null;
+		CSVData data = new CSVData(filename, null, numLinesToIgnore + 1);
+		return data;
 	}
-	
+
 	/***
 	 * Saves the state of the data into a CSV file
 	 * 
@@ -98,7 +95,7 @@ public class CSVData {
 	 *            the name of the file that you save the data into
 	 */
 	public void saveToFile(String filename) {
-		
+		this.filePathToCSV = filename;
 	}
 
 	/***
@@ -136,7 +133,7 @@ public class CSVData {
 		}
 		return cols;
 	}
-	
+
 	public int getColumnIndex(String name) {
 		int index = 0;
 		for (int i = 0; i < columnNames.length; i++) {
@@ -166,8 +163,11 @@ public class CSVData {
 
 	/***
 	 * Returns the rows between the two given rows
-	 * @param startRow the starting row
-	 * @param endRow the ending row
+	 * 
+	 * @param startRow
+	 *            the starting row
+	 * @param endRow
+	 *            the ending row
 	 * @return all the data between startRow and endRow
 	 */
 	public double[][] getRows(int startRow, int endRow) {
@@ -183,7 +183,9 @@ public class CSVData {
 
 	/***
 	 * Returns the data from specific rows
-	 * @param rowindexes the rows you want to get data from
+	 * 
+	 * @param rowindexes
+	 *            the rows you want to get data from
 	 * @return the data from the rows
 	 */
 	public double[][] getRows(int[] rowindexes) {
@@ -194,13 +196,17 @@ public class CSVData {
 			for (int col = 0; col < data[0].length; col++) {
 				rows[i][col] = data[index][col];
 			}
-		} return rows;
+		}
+		return rows;
 	}
 
 	/***
 	 * Returns the columns between the two given columns
-	 * @param startCol the starting column
-	 * @param endCol the ending column
+	 * 
+	 * @param startCol
+	 *            the starting column
+	 * @param endCol
+	 *            the ending column
 	 * @return all the data between startCol and endCol
 	 */
 	public double[][] getColumns(int startCol, int endCol) {
@@ -216,7 +222,9 @@ public class CSVData {
 
 	/***
 	 * Returns the data from the columnNames
-	 * @param colNames the columns you want to get data from
+	 * 
+	 * @param colNames
+	 *            the columns you want to get data from
 	 * @return the data from the columns
 	 */
 	public double[][] getColumns(String[] colNames) {
@@ -226,16 +234,20 @@ public class CSVData {
 		for (int i = 0; i < colNames.length; i++) {
 			String name = colNames[i];
 			int index = getColumnIndex(name);
-			
+
 			for (int row = 0; row < data.length; row++) {
 				cols[num1][i] = data[row][index];
-			} num1++;
-		} return cols;
+			}
+			num1++;
+		}
+		return cols;
 	}
 
 	/***
-	 * @param columnIndex the column that you want to change
-	 * @param vals the values you want the column to have
+	 * @param columnIndex
+	 *            the column that you want to change
+	 * @param vals
+	 *            the values you want the column to have
 	 */
 	public void setColumn(int columnIndex, double[] vals) {
 		for (int i = 0; i < data.length; i++) {
@@ -246,8 +258,10 @@ public class CSVData {
 	}
 
 	/***
-	 * @param rowIndex the row that you want to change
-	 * @param vals the values you want the row to have
+	 * @param rowIndex
+	 *            the row that you want to change
+	 * @param vals
+	 *            the values you want the row to have
 	 */
 	public void setRow(int rowIndex, double[] vals) {
 		for (int i = 0; i < data[0].length; i++) {
@@ -259,12 +273,12 @@ public class CSVData {
 
 	/***
 	 * 
-	 * @param rowIndex the specific row 
-	 * that contains the index you want to change
-	 * @param columnIndex the specific column 
-	 * that contains the index you want to change
-	 * @param vals the value you want to change
-	 * (row, col) to be
+	 * @param rowIndex
+	 *            the specific row that contains the index you want to change
+	 * @param columnIndex
+	 *            the specific column that contains the index you want to change
+	 * @param vals
+	 *            the value you want to change (row, col) to be
 	 */
 	public void setValue(int rowIndex, int columnIndex, double[] vals) {
 		for (int row = 0; row < rowIndex; row++) {
@@ -278,6 +292,7 @@ public class CSVData {
 
 	/***
 	 * Return the titles of all the columns
+	 * 
 	 * @return columnNames the names of the columns
 	 */
 	public String getTitles() {
