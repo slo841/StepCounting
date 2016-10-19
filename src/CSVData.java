@@ -5,7 +5,7 @@ import java.util.Scanner;
 /***
  * This is a helper class.
  * 
- * @author Stephanie
+ * @author slo841
  *
  */
 public class CSVData {
@@ -88,7 +88,7 @@ public class CSVData {
 		return data;
 	}
 	
-	public String[][] readCSVFile(CSVData data, int numLinesToIgnore) {
+	public String[][] readCSVFile(int numLinesToIgnore) {
 		int numCol = columnNames.length;
 		String[][] file = new String[numRows][numCol];
 
@@ -117,6 +117,14 @@ public class CSVData {
 		this.filePathToCSV = filename;
 	}
 
+	public int getNumOfCols() {
+		return columnNames.length;
+	}
+	
+	public int getNumOfRows() {
+		return this.numRows;
+	}
+	
 	/***
 	 * Returns an individual column in the data
 	 * 
