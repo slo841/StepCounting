@@ -1,4 +1,6 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -113,8 +115,15 @@ public class CSVData {
 	 * @param filename
 	 *            the name of the file that you save the data into
 	 */
-	public void saveToFile(String filename) {
-		this.filePathToCSV = filename;
+	public static void saveToFile(String filename, String data) {
+//		this.filePathToCSV = filename;
+		File outFile = new File(filename);
+		
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile))) {
+			writer.write(data);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int getNumOfCols() {
