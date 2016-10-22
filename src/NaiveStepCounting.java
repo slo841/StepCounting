@@ -12,7 +12,7 @@ public class NaiveStepCounting {
 		
 		//accelerometer data
 		for (int i = 0; i <= 2; i++) {
-			double[][] accData = sensorData[0]
+//			double[][] accData = sensorData[0]
 		}
 	
 		
