@@ -209,6 +209,7 @@ public class CSVData {
 	public double[][] getRows(int startRow, int endRow) {
 		int numOfRows = endRow - startRow;
 		double[][] rows = new double[numOfRows][data[0].length];
+		
 		for (int row = 0; row < numOfRows; row++) {
 			for (int col = 0; col < data[0].length; col++) {
 				rows[row][col] = data[row][col];
