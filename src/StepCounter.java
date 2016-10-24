@@ -1,4 +1,4 @@
-public class NaiveStepCounting {
+public class StepCounter {
 
 	/***
 	 * 
@@ -6,7 +6,7 @@ public class NaiveStepCounting {
 	 * @param sensorData
 	 * @return
 	 */
-	private static int countSteps(double[] times, double[][] sensorData) {
+	public static int countSteps(double[] times, double[][] sensorData) {
 		double[] accData = new double[3];
 		double[] gyroData = new double[3];
 		int stepCount = 0;
