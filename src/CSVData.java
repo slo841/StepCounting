@@ -115,8 +115,7 @@ public class CSVData {
 	 * @param filename
 	 *            the name of the file that you save the data into
 	 */
-	public static void saveToFile(String filename, String data) {
-//		this.filePathToCSV = filename;
+	public static void writeDataToFile(String filename, String data) {
 		File outFile = new File(filename);
 		
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile))) {

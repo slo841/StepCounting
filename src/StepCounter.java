@@ -1,5 +1,17 @@
 public class StepCounter {
 
+	public void fixTime(CSVData data) {
+		double[] time = data.getColumn(0);
+		
+		//WARNING: TO DO
+		double temp = time[0];
+		time[0] = 0;
+		
+		for (int i = 0; i < time.length - 1; i++) {
+			time[i] = time[i + 1] - time[i];
+		}
+	}
+	
 	/***
 	 * 
 	 * @param times
