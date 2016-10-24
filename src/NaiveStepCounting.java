@@ -1,4 +1,3 @@
-
 public class NaiveStepCounting {
 
 	/***
@@ -8,19 +7,44 @@ public class NaiveStepCounting {
 	 * @return
 	 */
 	private static int countSteps(double[] times, double[][] sensorData) {
-		double[] magnitudes = calculateMagnitudesFor(sensorData);
+		double[] accData = new double[3];
+		double[] gyroData = new double[3];
+		int stepCount = 0;
 		
-		//accelerometer data
-		for (int i = 0; i <= 2; i++) {
-			double[][] accData = sensorData[0];
+		//accelerometer data		
+		for (int row = 0; row < sensorData.length; row++) {
+			for (int col = 0; col <= 2; col++) {
+				accData = calculateMagnitudesFor(sensorData);
+			}	
 		}
-	
+		
+		double accStandardDev = calculateStandardDeviation(accData, calculateMean(accData));
+		
+		for (int i = 0; i < accData.length; i++) {
+			if (accData[i] > accData[i - 1] && accData[i] > accData[i + 1]) {
+				if (accData[i] > accStandardDev + 2) {
+					stepCount++;
+				}
+			}
+		}
 		
 		//gyro data
-		for (int i = 3; i <= 5; i++) {
-					
+		for (int row = 0; row < sensorData.length; row++) {
+			for (int col = 3; col <= 5; col++) {
+				gyroData = calculateMagnitudesFor(sensorData);
+			}	
 		}
-		return 0;
+		
+		double gyroStandardDev = calculateStandardDeviation(accData, calculateMean(accData));
+		
+		for (int i = 0; i < gyroData.length; i++) {
+			if (gyroData[i] > gyroData[i - 1] && gyroData[i] > gyroData[i + 1]) {
+				if (gyroData[i] > gyroStandardDev + 2) {
+					stepCount++;
+				}
+			}
+		}
+		return stepCount;
 	}
 
 	/***
@@ -30,7 +54,7 @@ public class NaiveStepCounting {
 	 * @param z
 	 * @return
 	 */
-	public static double calculateMagnitude(double x, double y, double z) {
+	private static double calculateMagnitude(double x, double y, double z) {
 		return Math.sqrt((x * x) + (y * y) + (z * z));
 	}
 
@@ -39,7 +63,7 @@ public class NaiveStepCounting {
 	 * @param sensorData
 	 * @return
 	 */
-	private static double[] calculateMagnitudesFor(double[][] sensorData) {
+	public static double[] calculateMagnitudesFor(double[][] sensorData) {
 		double[] mag = new double[sensorData.length];
 		int col = 0;
 
@@ -47,7 +71,7 @@ public class NaiveStepCounting {
 			double x = sensorData[row][col];
 			double y = sensorData[row][col + 1];
 			double z = sensorData[row][col + 2];
-
+			
 			mag[row] = calculateMagnitude(x, y, z);
 		}
 		return mag;
@@ -59,7 +83,7 @@ public class NaiveStepCounting {
 	 * @param mean
 	 * @return
 	 */
-	private static double calculateStandardDeviation(double[] arr, double mean) {
+	public static double calculateStandardDeviation(double[] arr, double mean) {
 		double sum = 0;
 
 		for (int i = 0; i < arr.length; i++) {
@@ -75,7 +99,7 @@ public class NaiveStepCounting {
 	 * @param arr
 	 * @return
 	 */
-	private static double calculateMean(double[] arr) {
+	public static double calculateMean(double[] arr) {
 		double sum = 0;
 
 		for (int i = 0; i < arr.length; i++) {
